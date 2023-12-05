@@ -14,6 +14,8 @@ function isActivePage($currentPage, $pageName){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
     <link rel="stylesheet" href="src/css/main.css">
     <title>
       <?= $currentPage == 'index' ? 'Chef em Casa - Página Inicial' : ''; ?>
@@ -22,7 +24,7 @@ function isActivePage($currentPage, $pageName){
     </title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
   <div class="container">
   <a class="navbar-brand" href="index.php">
     <img src="src/img/logo.png" alt="Logo Chef em Casa" class="w-25">
