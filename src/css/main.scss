@@ -54,4 +54,34 @@ nav {
   color: $color1 !important;
 }
 
+#cta {
+  position: relative;
+  color: white;
+  z-index: 1;
+}
+
+#cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* Adicione este gradiente escuro como overlay */
+  z-index: -1;
+}
+
+#cta {
+  background-image: url("../img/12-min.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+
+
+
+
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

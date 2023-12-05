@@ -50,9 +50,14 @@ function isActivePage($currentPage, $pageName){
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <a class="btn btn-color1 my-2 my-sm-0 text-light" href="register.php">
+    <a class="btn btn-outline-color1 my-2 my-sm-0" href="login.php">
+        Login
+      </a>
+      <a class="btn btn-color1 my-2 my-sm-0 text-light ml-2" href="register.php">
         Cadastre-se
       </a>
+
+
     </form>
   </div>
   </div>

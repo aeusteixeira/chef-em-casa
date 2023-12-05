@@ -1,6 +1,6 @@
 <?php
   $currentPage = 'index';
-  include_once(__DIR__ . '/components/header.php');
+  include_once(__DIR__ . '/components/public/header.php');
 ?>
 <main class="">
   <section id="carrousel">
@@ -205,9 +205,25 @@
       </div>
     </div>
   </section>
+  <section id="cta" class="text-white text-center py-5">
+    <div class="container">
+        <h2 class="mb-4">Faça parte da nossa comunidade!</h2>
+        <p class="lead mb-4">Registre-se agora para ter acesso a receitas exclusivas, interagir com outros chefs e
+            compartilhar suas próprias criações.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <a href="cadastro.php" class="btn btn-light btn-lg btn-block">Cadastre-se</a>
+            </div>
+            <div class="col-md-6">
+                <a href="login.php" class="btn btn-outline-light btn-lg btn-block">Login</a>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 </main>
 
 <?php
-  include_once(__DIR__ . '/components/footer.php');
+  include_once(__DIR__ . '/components/public/footer.php');
 ?>

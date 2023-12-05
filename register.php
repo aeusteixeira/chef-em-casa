@@ -1,6 +1,6 @@
 <?php
   $currentPage = 'index';
-  include_once(__DIR__ . '/components/header.php');
+  include_once(__DIR__ . '/components/public/header.php');
 ?>
 
 <main class="container pt-5">
@@ -35,5 +35,5 @@
 </main>
 
 <?php
-  include_once(__DIR__ . '/components/footer.php');
+  include_once(__DIR__ . '/components/public/footer.php');
 ?>

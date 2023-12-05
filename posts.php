@@ -1,6 +1,6 @@
 <?php
   $currentPage = 'index';
-  include_once(__DIR__ . '/components/header.php');
+  include_once(__DIR__ . '/components/public/header.php');
 ?>
 <main class="container">
 
