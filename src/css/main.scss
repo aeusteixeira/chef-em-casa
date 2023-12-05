@@ -10,6 +10,8 @@ $theme-colors: (
     'color3': $color3
 );
 
+
+
 // Torna a fonte responsiva. Por padrão, vem ativada
 $enable-responve-font-size: true !default;
 
@@ -21,5 +23,12 @@ $enable-rounded: true !default;
 
 // Adiciona as cores com um degradê
 $enable-gradients: false !default;
+
+.features{
+    background-image: url('../img/12-min.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

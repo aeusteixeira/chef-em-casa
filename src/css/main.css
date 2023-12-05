@@ -1,4 +1,11 @@
 @charset "UTF-8";
+.features {
+  background-image: url("../img/12-min.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
