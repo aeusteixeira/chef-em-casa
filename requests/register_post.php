@@ -4,7 +4,7 @@ function connectDatabase(){
     $server = 'localhost';
     $user = 'root';
     $password = '';
-    $database = 'chef-em-casa';
+    $database = 'banco_de_dados';
 
     $connection = mysqli_connect($server, $user, $password, $database);
 
@@ -23,17 +23,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $connection = connectDatabase();
 
     // Usar prepared statements para proteger contra SQL injection
-    $query = $connection->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-    $query->bind_param("sss", $name, $email, $password_hashed);
+    $name = mysqli_real_escape_string($connection, $name);
+    $email = mysqli_real_escape_string($connection, $email);
+    $password= mysqli_real_escape_string($connection, $password);
+
 
     $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
-    if ($query->execute()) {
+    $query = "INSERT INTO users (name, email, password, level) VALUES ('$name', '$email', '$password_hashed', 'common')";
+
+    if(mysqli_query($connection, $query)) {
         // Configurar a sessão
         session_start();
 
         // Armazenar o ID do usuário na sessão
-        $_SESSION['user_id'] = $query->insert_id;
+        $_SESSION['user_id'] = mysqli_insert_id($connection);
 
         // Outras informações que você pode querer armazenar na sessão
         $_SESSION['user_name'] = $name;
@@ -48,8 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $query->close();
-    $connection->close();
+    mysqli_close($connection);
 }
 
 ?>

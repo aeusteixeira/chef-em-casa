@@ -7,6 +7,8 @@
 );
 
 $pageName = $pageInfo['pageName'];
+
+include_once(__DIR__ . '/components/public/header.php');
 ?>
 <main class="container">
 

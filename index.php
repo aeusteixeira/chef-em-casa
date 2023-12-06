@@ -115,7 +115,7 @@ include_once(__DIR__ . '/components/public/header.php');
               <p class="card-text">
                 Um delicioso escondidinho de carne seca com purê de mandioca e queijo coalho gratinado.
               </p>
-              <a href="posts.php" class="btn btn-color1 btn-sm">
+              <a href="post.php" class="btn btn-color1 btn-sm">
                 Leia Mais
               </a>
             </div>
@@ -132,7 +132,7 @@ include_once(__DIR__ . '/components/public/header.php');
               <p class="card-text">
                 Receita para toda a família, um delicioso bóbó de camarão com arroz branco e farofa de dendê.
               </p>
-              <a href="posts.php" class="btn btn-color1 btn-sm">
+              <a href="post.php" class="btn btn-color1 btn-sm">
                 Leia Mais
               </a>
             </div>
@@ -149,7 +149,7 @@ include_once(__DIR__ . '/components/public/header.php');
               <p class="card-text">
                 Um delicioso bolo de cenoura com cobertura de chocolate, perfeito para o café da tarde.
               </p>
-              <a href="posts.php" class="btn btn-color1 btn-sm">
+              <a href="post.php" class="btn btn-color1 btn-sm">
                 Leia Mais
               </a>
             </div>
@@ -166,7 +166,7 @@ include_once(__DIR__ . '/components/public/header.php');
               <p class="card-text">
                 Uma farofa de mandioca com bacon e ovos, perfeita para acompanhar qualquer prato.
               </p>
-              <a href="posts.php" class="btn btn-color1 btn-sm">
+              <a href="post.php" class="btn btn-color1 btn-sm">
                 Leia Mais
               </a>
             </div>
@@ -183,7 +183,7 @@ include_once(__DIR__ . '/components/public/header.php');
               <p class="card-text">
                 Um delicioso arroz de pato com linguiça calabresa e bacon, perfeito para o almoço de domingo.
               </p>
-              <a href="posts.php" class="btn btn-color1 btn-sm">
+              <a href="post.php" class="btn btn-color1 btn-sm">
                 Leia Mais
               </a>
             </div>
@@ -200,7 +200,7 @@ include_once(__DIR__ . '/components/public/header.php');
               <p class="card-text">
                 Uma deliciosa sopa de legumes com carne moída, perfeita para os dias frios.
               </p>
-              <a href="posts.php" class="btn btn-color1 btn-sm">
+              <a href="post.php" class="btn btn-color1 btn-sm">
                 Leia Mais
               </a>
             </div>
