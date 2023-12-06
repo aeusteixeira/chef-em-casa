@@ -23,7 +23,7 @@ include_once('../components/admin/header.php');
         <section class="col-md-9">
             <h2><?= $pageInfo['title'] ?></h2>
             <p><?= $pageInfo['description'] ?></p>
-            <a href="new_user.php" class="btn btn-success my-2 my-sm-0 text-light">
+            <a href="create_user.php" class="btn btn-success my-2 my-sm-0 text-light">
                 Adicionar novo usuário
             </a>
             <hr>
