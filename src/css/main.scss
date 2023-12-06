@@ -67,7 +67,10 @@ nav {
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* Adicione este gradiente escuro como overlay */
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)
+  ); /* Adicione este gradiente escuro como overlay */
   z-index: -1;
 }
 
@@ -78,10 +81,5 @@ nav {
   background-attachment: fixed;
   background-position: center;
 }
-
-
-
-
-
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

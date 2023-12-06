@@ -1,11 +1,12 @@
 <?php
+
 $pageInfo = array(
-    'title' => 'Listagem de Usuários',
-    'description' => 'Visualize e gerencie os usuários cadastrados.',
-    'pageName' => 'users',
+    'title' => 'Listagem de Comentários',
+    'description' => 'Visualize e gerencie os comentários nas postagens.',
+    'pageName' => 'comments',
 );
 
-include_once('../components/admin/header.php');
+$pageName = $pageInfo['pageName'];
 
 include_once('../components/admin/header.php');
 ?>
@@ -23,8 +24,8 @@ include_once('../components/admin/header.php');
         <section class="col-md-9">
             <h2><?= $pageInfo['title'] ?></h2>
             <p><?= $pageInfo['description'] ?></p>
-            <a href="new_user.php" class="btn btn-success my-2 my-sm-0 text-light">
-                Adicionar novo usuário
+            <a href="new_comment.php" class="btn btn-success my-2 my-sm-0 text-light">
+                Adicionar novo comentário
             </a>
             <hr>
             <div class="card">
@@ -32,16 +33,20 @@ include_once('../components/admin/header.php');
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Data de Registro</th>
+                                <th>ID</th>
+                                <th>Postagem</th>
+                                <th>Autor</th>
+                                <th>Comentário</th>
+                                <th>Data de Comentário</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
+                                <td>1</td>
+                                <td>Receita de Massa</td>
                                 <td>João Silva</td>
-                                <td>joao@gmail.com</td>
+                                <td>Delicioso! Vou experimentar em casa.</td>
                                 <td>01/01/2023</td>
                                 <td>
                                     <div class="dropdown">
@@ -75,6 +80,5 @@ include_once('../components/admin/header.php');
 </main>
 
 <?php
-$currentPage = 'users';
 include_once('../components/admin/footer.php');
 ?>

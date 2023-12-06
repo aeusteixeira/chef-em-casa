@@ -1,6 +1,14 @@
 <?php
-  $currentPage = 'index';
-  include_once(__DIR__ . '/components/public/header.php');
+
+ $pageInfo = array(
+  'pageName' => 'index',
+  'title' => 'Chef Em Casa - Inspire-se na Culinária em Comunidade',
+  'description' => 'Bem-vindo ao Chef Em Casa, o seu destino online para explorar, criar e compartilhar experiências culinárias únicas. Descubra receitas deliciosas, compartilhe suas próprias criações e conecte-se com uma comunidade apaixonada por culinária. Seja você um chef experiente ou alguém apenas começando sua jornada na cozinha, aqui você encontrará inspiração para cada paladar.'
+);
+
+$pageName = $pageInfo['pageName'];
+
+include_once(__DIR__ . '/components/public/header.php');
 ?>
 <main class="">
   <section id="carrousel">

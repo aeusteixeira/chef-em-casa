@@ -1,6 +1,12 @@
 <?php
-  $currentPage = 'index';
-  include_once(__DIR__ . '/components/public/header.php');
+
+ $pageInfo = array(
+  'title' => 'Título da Postagem - Chef em Casa',
+  'description' => 'Descrição da Postagem',
+  'pageName' => 'posts',
+);
+
+$pageName = $pageInfo['pageName'];
 ?>
 <main class="container">
 

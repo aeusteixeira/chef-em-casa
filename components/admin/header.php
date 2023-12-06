@@ -1,10 +1,6 @@
 <?php
-function isActivePage($currentPage, $pageName){
-  if($currentPage == $pageName){
-    return 'active';
-  }
-  return '';
-}
+
+session_start();
 
 ?>
 
@@ -17,11 +13,16 @@ function isActivePage($currentPage, $pageName){
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <link rel="stylesheet" href="../src/css/main.css">
-    <title>
-      <?= $currentPage == 'index' ? 'Chef em Casa - Página Inicial' : ''; ?>
-      <?= $currentPage == 'about' ? 'Chef em Casa - Sobre' : ''; ?>
-      <?= $currentPage == 'contact' ? 'Chef em Casa - Contato' : ''; ?>
-    </title>
+    <?php
+    // Inclua as informações da página atual
+    if (isset($pageInfo)) {
+        echo "<title>{$pageInfo['title']}</title>";
+        echo "<meta name='description' content='{$pageInfo['description']}'>";
+    } else {
+        echo "<title>Chef em Casa</title>";
+        echo "<meta name='description' content='Bem-vindo ao Chef em Casa'>";
+    }
+    ?>
 </head>
 <body>
     <!-- Navbar do dashboard -->
@@ -35,17 +36,20 @@ function isActivePage($currentPage, $pageName){
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"><i class="fa fa-home"></i> Início <span class="sr-only">(Página atual)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-user"></i> Perfil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-cog"></i> Configurações</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-sign-out"></i> Sair</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i> <?= $_SESSION['user_name'] ?? 'Usuário' ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-user"></i> Perfil
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-cog"></i> Configurações
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out"></i> Sair</a>
+                        </div>
                     </li>
                 </ul>
             </div>

@@ -1,8 +1,14 @@
 <?php
-  $currentPage = 'index';
-  include_once('../components/admin/header.php');
 
+$pageInfo = array(
+    'title' => 'Dashboard',
+    'description' => 'Visualize as estatísticas do site.',
+    'pageName' => 'index',
+);
 
+$pageName = $pageInfo['pageName'];
+
+include_once('../components/admin/header.php');
 ?>
 
     <!-- Conteúdo do dashboard -->
@@ -146,6 +152,6 @@
 
 <?php
   $currentPage = 'index';
-  include_once('../components/admin/header.php');
+  include_once('../components/admin/footer.php');
 
 ?>

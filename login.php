@@ -1,6 +1,14 @@
 <?php
-  $currentPage = 'login';
-  include_once(__DIR__ . '/components/public/header.php');
+
+ $pageInfo = array(
+  'title' => 'Login - Chef em Casa',
+  'description' => 'Entre em contato com a equipe do Chef em Casa.',
+  'pageName' => 'contact',
+);
+
+$pageName = $pageInfo['pageName'];
+
+include_once(__DIR__ . '/components/public/header.php');
 ?>
 
 <main class="container py-5">
