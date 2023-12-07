@@ -18,11 +18,19 @@ include_once(__DIR__ . '/components/public/header.php');
         <div class="card-body">
           <h2 class="text-center mb-4">Bem-vindo de volta!</h2>
           
+          <?php 
+            if(isset($_SESSION['login_error'])){
+          ?>
+              <div class="alert alert-danger" role="alert">
+                <?php var_dump($_SESSION['login_error']); ?>
+              </div>
+
+            <?php } ?>
           <!-- Formulário de Login -->
-          <form action="processar_login.php" method="POST">
+          <form action="requests/request_login.php" method="POST">
             <div class="mb-3">
-              <label for="username" class="form-label">Nome de Usuário</label>
-              <input type="text" class="form-control" id="username" name="username" required>
+              <label for="email" class="form-label">E-mail</label>
+              <input type="text" class="form-control" id="email" name="email" required>
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Senha</label>
