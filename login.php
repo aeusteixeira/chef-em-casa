@@ -17,15 +17,14 @@ include_once(__DIR__ . '/components/public/header.php');
       <div class="card shadow">
         <div class="card-body">
           <h2 class="text-center mb-4">Bem-vindo de volta!</h2>
-          
+
           <?php 
             if(isset($_SESSION['login_error'])){
           ?>
-              <div class="alert alert-danger" role="alert">
-                <?php var_dump($_SESSION['login_error']); ?>
-              </div>
-
-            <?php } ?>
+            <div class="alert alert-danger" role="alert">
+              <?php echo $_SESSION['login_error']; ?>
+            </div>
+          <?php } ?>
           <!-- Formulário de Login -->
           <form action="requests/request_login.php" method="POST">
             <div class="mb-3">
@@ -38,7 +37,7 @@ include_once(__DIR__ . '/components/public/header.php');
             </div>
             <button type="submit" class="btn btn-primary btn-block">Entrar</button>
           </form>
-          
+
           <div class="text-center mt-3">
             <a href="cadastro.php">Não tem uma conta? Cadastre-se aqui.</a>
           </div>
