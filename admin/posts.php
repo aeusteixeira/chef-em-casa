@@ -25,6 +25,13 @@ include_once('../components/admin/header.php');
                 Criar nova postagem
             </a>
             <hr>
+
+            <?php if(isset($_SESSION['message'])){ ?>
+                <div class="alert alert-<?= $_SESSION['message_type'] ?>" role="alert">
+                    <?php echo $_SESSION['message']; ?>
+                </div>
+            <?php unset($_SESSION['message']); } ?>
+            
             <div class="card">
                 <div class="card-body">
                     <table class="table table-hover table-striped">

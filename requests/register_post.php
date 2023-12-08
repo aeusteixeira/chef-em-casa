@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Outras informações que você pode querer armazenar na sessão
         $_SESSION['user_name'] = $name;
         $_SESSION['user_email'] = $email;
+        $_SESSION['user_level'] = 'common';
 
         // Redirecionar para admin/index.php
         header("Location: ../admin/index.php");

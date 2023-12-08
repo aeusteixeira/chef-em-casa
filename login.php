@@ -24,7 +24,8 @@ include_once(__DIR__ . '/components/public/header.php');
             <div class="alert alert-danger" role="alert">
               <?php echo $_SESSION['login_error']; ?>
             </div>
-          <?php } ?>
+            <?php unset($_SESSION['login_error']);
+            } ?>
           <!-- Formulário de Login -->
           <form action="requests/request_login.php" method="POST">
             <div class="mb-3">

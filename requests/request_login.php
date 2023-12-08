@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Armazenar o ID do usuário e o nome
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_name'] = $row['name'];
+            $_SESSION['user_level'] = $row['level'];
 
             // Redirecionar para o dashboard
             header("Location: ../admin/index.php");
