@@ -5,6 +5,9 @@ if(!isset($_SESSION['user_id'])){
     header('Location: ../login.php');
 }
 
+include_once('../helpers/database.php');
+$connection = connectDatabase();
+
 ?>
 
 <!DOCTYPE html>
