@@ -208,7 +208,7 @@ include_once(__DIR__ . '/components/public/header.php');
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Posts do mesmo autor</h5>
+                        <h5 class="card-title">Posts relacionados</h5>
                         <div class="row">
                             <!-- Loop para exibir posts relacionados -->
                             <?php while ($similar_post = mysqli_fetch_assoc($similar_posts)) { ?>
@@ -229,9 +229,9 @@ include_once(__DIR__ . '/components/public/header.php');
                             <?php } ?>
                             <!-- Mensagem se não houver posts relacionados -->
                             <?php if(mysqli_num_rows($similar_posts) == 0){ ?>
-                            <div class="alert alert-info">
-                                O autor não possui outros posts.
-                            </div>
+                                <div class="alert alert-info">
+                                    O autor não possui outros posts.
+                                </div>
                             <?php } ?>
                         </div>
                     </div>

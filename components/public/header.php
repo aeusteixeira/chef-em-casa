@@ -68,7 +68,7 @@ include_once('helpers/isActivePage.php');
             </a>
           <?php } else { ?>
             <a class="btn btn-color1 my-2 my-sm-0 text-light ml-2" href="admin/index.php">
-              Dashboard
+              Ir para o dashboard
             </a>
           <?php } ?>
         </form>
