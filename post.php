@@ -1,5 +1,6 @@
 <?php
 
+// Inclui o arquivo de conexão com o banco de dados
 include_once('helpers/database.php');
 
 // Conexão com o banco de dados
@@ -8,49 +9,86 @@ $connection = connectDatabase();
 // Pegamos o ID da URL
 $post_id = $_GET['post_id'];
 
-// Validação se não é nada malicioso
+// Validação para evitar injeção de SQL
 $post_id = mysqli_real_escape_string($connection, $post_id);
 
-// Query para selecionar o post acesado
+// Query para selecionar o post acessado
 $query = "SELECT 
-posts.title,
-posts.content,
-posts.image,
-users.name as 'user_name',
-users.about as 'user_about',
-users.image as 'user_image',
+    posts.title as title,
+    posts.content as content,
+    posts.image as image,
+    posts.created_at as created_at,
+    users.name as user_name,
+    users.about as user_about,
+    users.image as user_image
 FROM posts
 JOIN users ON users.id = posts.user_id
 WHERE posts.id = '$post_id'";
 
-// Execução da query no banco
+// Execução da query para selecionar o post
 $result = mysqli_query($connection, $query);
 
-// Veriica se retornou algo
+// Query para selecionar os comentários do post acessado
+$queryComments = "SELECT 
+    comments.content as content,
+    users.name as user_name,
+    users.image as user_image
+FROM comments
+JOIN users ON users.id = comments.user_id
+WHERE comments.post_id = '$post_id'";
+
+// Execução da query para selecionar os comentários do post
+$comments = mysqli_query($connection, $queryComments);
+
+// Busca posts do mesmo autor ou, caso não tenha nenhum, busca posts aleatórios do banco
+$querySimilarPosts = "SELECT
+    posts.id as id,
+    posts.title as title,
+    posts.image as image,
+    posts.created_at as created_at,
+    users.name as user_name
+FROM posts
+JOIN users ON users.id = posts.user_id
+WHERE posts.user_id = (SELECT user_id FROM posts WHERE id = '$post_id')
+OR posts.id != '$post_id'
+LIMIT 3";
+
+// Execução da query para buscar posts relacionados
+$similar_posts = mysqli_query($connection, $querySimilarPosts);
+
+// Verifica se retornou algo
 if(mysqli_num_rows($result) > 0){
     // Transforma o resultado em um array associativo
     $row = mysqli_fetch_assoc($result);
 
+    // Atribui valores às variáveis
     $title = $row['title'];
     $date = $row['created_at'];
     $content = $row['content'];
     $image = $row['image'];
-
-
-}else{
-    echo "Publicação não encontrada";
+    $user_name = $row['user_name'];
+    $user_about = $row['user_about'];
+    $user_image = $row['user_image'];
+    
+} else {
+    // Se não retornou nada, redireciona para a página 404
+    header('Location: 404.php');
 }
 
- $pageInfo = array(
-  'title' => $title,
-  'description' => substr($content, 0, 120),
-  'pageName' => 'posts',
+// Informações da página para o SEO
+$pageInfo = array(
+    'title' => $title,
+    'description' => substr($content, 0, 120),
+    'pageName' => 'posts',
 );
 
+// Nome da página
 $pageName = $pageInfo['pageName'];
 
+// Inclui o cabeçalho da página
 include_once(__DIR__ . '/components/public/header.php');
 ?>
+
 <main class="container">
 
     <!-- Conteúdo do Post -->
@@ -58,7 +96,9 @@ include_once(__DIR__ . '/components/public/header.php');
         <div class="row">
             <div class="col-md-8 card">
                 <div class="card-body">
-                    <img src="<?php echo $image; ?>" class="img-fluid" alt="<?php echo $title; ?>" title="<?php echo $title; ?>">
+                    <!-- Conteúdo do post -->
+                    <img src="<?php echo $image; ?>" class="img-fluid" alt="<?php echo $title; ?>"
+                        title="<?php echo $title; ?>">
                     <h1 class="mt-4">
                         <?php echo $title; ?>
                     </h1>
@@ -69,10 +109,12 @@ include_once(__DIR__ . '/components/public/header.php');
                         <?php echo $content; ?>
                     </p>
                     <hr>
+
                     <!-- Compartilhamento nas Redes Sociais -->
                     <div class="mt-4">
                         <p>Compartilhe esta receita:</p>
-                        <a href="whatsapp://send?text=Confira essa deliciosa receita de Escondidinho de Carne Seca no Chef Em Casa: [URL]"
+                        <!-- Links para compartilhamento -->
+                        <a href="whatsapp://send?text=Confira essa deliciosa receita de Escondidinho de Carne Seca no Chef Em Casa"
                             class="btn btn-success" target="_blank" rel="noopener">
                             <i class="fab fa-whatsapp"></i> WhatsApp
                         </a>
@@ -90,16 +132,14 @@ include_once(__DIR__ . '/components/public/header.php');
                     <div class="mt-4">
                         <h3>Sobre o Autor</h3>
                         <div class="media">
-                            <img src="https://media.licdn.com/dms/image/D4D03AQGdVJQdQIFHrA/profile-displayphoto-shrink_200_200/0/1697559933642?e=1707350400&v=beta&t=wSCj9JIHeTQIhw2mwqZEFPholUh76YocekZVGXQKZOA"
-                                alt="Nome do Autor" class="mr-3 img-fluid rounded-circle" style="width: 100px;">
+                            <img src="<?php echo $user_image; ?>" alt="<?php echo $user_name; ?>"
+                                class="mr-3 img-fluid rounded-circle" style="width: 100px;">
                             <div class="media-body">
-                                <p><strong>
-                                        Matheus Teixeira
-                                    </strong></p>
+                                <h4>
+                                    <?php echo $user_name; ?>
+                                </h4>
                                 <p>
-                                    Graduado em Análise e Desenvolvimento de Sistemas | MBA em Inteligência Artificial
-                                    para Negócios | Instrutor de Programação no SENAC | Apaixonado por Marketing Digital
-                                    e Integração de Tecnologia
+                                    <?php echo $user_about; ?>
                                 </p>
                             </div>
                         </div>
@@ -108,63 +148,46 @@ include_once(__DIR__ . '/components/public/header.php');
                     <!-- Seção de Comentários -->
                     <div class="mt-4">
                         <h3>Comentários</h3>
-
-                        <!-- Comentário 1 -->
+                        <!-- Loop para exibir comentários -->
+                        <?php while ($comment = mysqli_fetch_assoc($comments)) { ?>
                         <div class="media mt-4">
-                            <img src="https://randomuser.me/api/portraits/men/50.jpg" class="mr-3 rounded-circle"
-                                alt="Usuário 1" style="width: 50px;">
+                            <img src="<?php echo $comment['user_image']; ?>" class="mr-3 img-fluid rounded-circle"
+                                alt="<?php echo $comment['user_name']; ?>" style="width: 50px;">
                             <div class="media-body">
-                                <h5 class="mt-0">
-                                    Michael Smith
-                                </h5>
-                                <p>Que receita incrível! Com certeza vou experimentar este final de semana. Obrigado por
-                                    compartilhar!</p>
+                                <h6>
+                                    <?php echo $comment['user_name']; ?>
+                                </h6>
+                                <p>
+                                    <?php echo $comment['content']; ?>
+                                </p>
                             </div>
                         </div>
-
-                        <!-- Comentário 2 -->
-                        <div class="media mt-4">
-                            <img src="https://randomuser.me/api/portraits/men/37.jpg" class="mr-3 rounded-circle"
-                                alt="Usuário 2" style="width: 50px;">
-                            <div class="media-body">
-                                <h5 class="mt-0">
-                                    João Silva
-                                </h5>
-                                <p>Adoro escondidinho de carne seca! Esta receita parece deliciosa. Vou adicionar à
-                                    minha
-                                    lista de
-                                    receitas para experimentar.</p>
-                            </div>
+                        <?php } ?>
+                        <!-- Mensagem se não houver comentários -->
+                        <?php if(mysqli_num_rows($comments) == 0){ ?>
+                        <div class="alert alert-info">
+                            Nenhum comentário encontrado.
                         </div>
-
-                        <!-- Comentário 3 -->
-                        <div class="media mt-4">
-                            <img src="https://randomuser.me/api/portraits/women/62.jpg" class="mr-3 rounded-circle"
-                                alt="Usuário 3" style="width: 50px;">
-                            <div class="media-body">
-                                <h5 class="mt-0">
-                                    Maria Souza
-                                </h5>
-                                <p>Que maravilha! Sempre estou à procura de novas receitas para testar, e esta
-                                    definitivamente está na
-                                    minha lista agora.</p>
-                            </div>
-                        </div>
-
-                        <!-- Adicione mais comentários conforme necessário -->
+                        <?php } ?>
                     </div>
+
                     <!-- Formulário de Comentários -->
                     <hr>
                     <div class="mt-4">
                         <h3>Deixe seu comentário</h3>
+
+                        <!-- Mensagem se o usuário não estiver logado -->
+                        <?php 
+                            if(!isset($_SESSION['user_id'])){ ?>
                         <div class="alert alert-info">
-                                Você precisa estar logado para comentar. <a href="login.php">Clique aqui</a> para
-                                fazer login em sua conta.
+                            Você precisa estar logado para comentar. <a href="login.php">Clique aqui</a> para
+                            fazer login em sua conta.
                         </div>
+                        <?php }else{ ?>
                         <form action="comentarios.php" method="post">
                             <div class="form-group">
                                 <p>
-                                    Você está logado como <strong>Matheus Teixeira</strong>.
+                                    Você está logado como <strong><?php echo $_SESSION['user_name']; ?></strong>.
                                 </p>
                             </div>
                             <div class="form-group">
@@ -174,64 +197,51 @@ include_once(__DIR__ . '/components/public/header.php');
                             </div>
                             <button type="submit" class="btn btn-color1">Enviar</button>
                         </form>
+                        <?php } ?>
                     </div>
 
                 </div>
 
-
-
-
-
             </div>
-            <!-- Sidebar (pode ser adicionada mais conteúdo à direita, como posts relacionados, etc.) -->
+
+            <!-- Sidebar (pode ser adicionado mais conteúdo à direita, como posts relacionados, etc.) -->
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Posts Relacionados</h5>
+                        <h5 class="card-title">Posts do mesmo autor</h5>
                         <div class="row">
-                            <!-- Post Relacionado 1 -->
-                            <div class="col-md-6">
+                            <!-- Loop para exibir posts relacionados -->
+                            <?php while ($similar_post = mysqli_fetch_assoc($similar_posts)) { ?>
+                            <div class="col-md-12">
                                 <div class="card mb-4">
-                                    <img src="src/img/10-min.png" class="card-img-top" alt="Post Relacionado 1">
+                                    <img src="<?php echo $similar_post['image']; ?>" class="card-img-top"
+                                        alt="<?php echo $similar_post['title']; ?>"
+                                        title="<?php echo $similar_post['title']; ?>">
                                     <div class="card-body">
-                                        <h6 class="card-title"><a href="#">Bolo de Cenoura com Cobertura de
-                                                Chocolate</a></h6>
+                                        <h6 class="card-title">
+                                            <a href="post.php?post_id=<?php echo $similar_post['id']; ?>">
+                                                <?php echo $similar_post['title']; ?>
+                                            </a>
+                                        </h6>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Post Relacionado 2 -->
-                            <div class="col-md-6">
-                                <div class="card mb-4">
-                                    <img src="src/img/11-min.png" class="card-img-top" alt="Post Relacionado 2">
-                                    <div class="card-body">
-                                        <h6 class="card-title"><a href="#">Frango Xadrez com Arroz e Legumes</a></h6>
-                                    </div>
-                                </div>
+                            <?php } ?>
+                            <!-- Mensagem se não houver posts relacionados -->
+                            <?php if(mysqli_num_rows($similar_posts) == 0){ ?>
+                            <div class="alert alert-info">
+                                O autor não possui outros posts.
                             </div>
-                            <!-- Post Relacionado 3 -->
-                            <div class="col-md-6">
-                                <div class="card mb-4">
-                                    <img src="src/img/12-min.png" class="card-img-top" alt="Post Relacionado 3">
-                                    <div class="card-body">
-                                        <h6 class="card-title"><a href="#">Pudim de Leite Condensado</a></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Post Relacionado 4 -->
-                            <div class="col-md-6">
-                                <div class="card mb-4">
-                                    <img src="src/img/13-min.png" class="card-img-top" alt="Post Relacionado 4">
-                                    <div class="card-body">
-                                        <h6 class="card-title"><a href="#">Salada de Frutas com Iogurte</a></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Adicione mais posts relacionados conforme necessário -->
+                            <?php } ?>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<?php
+// Inclui o rodapé da página
+include_once(__DIR__ . '/components/public/footer.php');
+?>
