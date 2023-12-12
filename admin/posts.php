@@ -77,11 +77,12 @@ if(mysqli_num_rows($result) > 0){
                                             Ações
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="edit_post.php?post_id=<?php echo $post['id']; ?>">
                                                 <i class="fas fa-edit"></i>
                                                 Editar
                                             </a>
-                                            <a class="dropdown-item text-danger" href="#">
+                                            <a class="dropdown-item text-danger" href="#"
+                                            onclick="confirm('Você realmente deseja apagar essa publicação?') ? window.location.href='requests/request_delete_post.php?post_id=<?php echo $post['id']; ?> ' : ''">
                                                 <i class="fas fa-trash"></i>
                                                 Excluir
                                             </a>
