@@ -28,7 +28,7 @@ include_once('../components/admin/header.php');
             </div>
             <div class="card mt-3">
                 <div class="card-body">
-                    <form action="">
+                    <form action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="image">Foto de Perfil</label>
                             <input type="file" class="form-control-file" id="image">
