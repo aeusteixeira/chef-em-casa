@@ -47,11 +47,8 @@ $connection = connectDatabase();
                             <i class="fa fa-user"></i> <?= $_SESSION['user_name'] ?? 'Usuário' ?>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="profile.php">
                                 <i class="fa fa-user"></i> Perfil
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fa fa-cog"></i> Configurações
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out"></i> Sair</a>
