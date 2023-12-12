@@ -34,6 +34,10 @@ include_once('../components/admin/header.php');
                             <input type="text" class="form-control" id="name" value="Matheus Teixeira">
                         </div>
                         <div class="form-group">
+                            <label for="about">Sobre</label>
+                            <textarea class="form-control" id="about" rows="3">Desenvolvedor Web</textarea>
+                        </div>
+                        <div class="form-group">
                             <label for="email">Endereço de Email</label>
                             <input type="email" class="form-control" id="email"
                                 value="contato.matheusteixeira@gmail.com">
