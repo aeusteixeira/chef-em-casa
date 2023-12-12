@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12-Dez-2023 às 22:31
+-- Tempo de geração: 12-Dez-2023 às 22:41
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.0.30
 
@@ -90,19 +90,20 @@ CREATE TABLE `posts` (
   `title` varchar(255) DEFAULT NULL,
   `content` text DEFAULT NULL,
   `image` varchar(255) NOT NULL,
-  `views` int(11) NOT NULL
+  `views` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `posts`
 --
 
-INSERT INTO `posts` (`id`, `user_id`, `title`, `content`, `image`, `views`) VALUES
-(1, 1, 'Como fazer um bolo de cenoura', 'Misture os ingredientes e asse por 30 minutos.', '', 0),
-(2, 2, 'Dicas para estudar melhor', 'Faça resumos e revise o conteúdo com frequência.', '', 0),
-(3, 3, 'Receita de pão caseiro', 'Misture a farinha, o fermento e a água e deixe descansar por 1 hora.', '', 0),
-(4, 4, 'Como organizar sua rotina de trabalho', 'Faça uma lista de tarefas e priorize as mais importantes.', '', 0),
-(5, 5, 'Dicas para cuidar das plantas', 'Regue as plantas regularmente e coloque-as em um local com luz solar.', '', 0);
+INSERT INTO `posts` (`id`, `user_id`, `title`, `content`, `image`, `views`, `created_at`) VALUES
+(1, 1, 'Como fazer um bolo de cenoura', 'Misture os ingredientes e asse por 30 minutos.', '', 0, '2023-12-12 21:40:31'),
+(2, 2, 'Dicas para estudar melhor', 'Faça resumos e revise o conteúdo com frequência.', '', 0, '2023-12-12 21:40:31'),
+(3, 3, 'Receita de pão caseiro', 'Misture a farinha, o fermento e a água e deixe descansar por 1 hora.', '', 0, '2023-12-12 21:40:31'),
+(4, 4, 'Como organizar sua rotina de trabalho', 'Faça uma lista de tarefas e priorize as mais importantes.', '', 0, '2023-12-12 21:40:31'),
+(5, 5, 'Dicas para cuidar das plantas', 'Regue as plantas regularmente e coloque-as em um local com luz solar.', '', 0, '2023-12-12 21:40:31');
 
 -- --------------------------------------------------------
 
@@ -179,7 +180,7 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT de tabela `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `users`
