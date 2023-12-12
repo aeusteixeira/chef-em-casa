@@ -95,7 +95,6 @@ if(mysqli_num_rows($result) > 0){
                                 </td>
                             </tr>
                         <?php } ?>
-                            <!-- Adicione mais linhas conforme necessário -->
                         </tbody>
                     </table>
                 </div>
