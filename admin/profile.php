@@ -30,6 +30,10 @@ include_once('../components/admin/header.php');
                 <div class="card-body">
                     <form action="">
                         <div class="form-group">
+                            <label for="image">Foto de Perfil</label>
+                            <input type="file" class="form-control-file" id="image">
+                        </div>
+                        <div class="form-group">
                             <label for="name">Nome</label>
                             <input type="text" class="form-control" id="name" value="Matheus Teixeira">
                         </div>
@@ -46,6 +50,11 @@ include_once('../components/admin/header.php');
                             <label for="password">Nova Senha</label>
                             <input type="password" class="form-control" id="password">
                         </div>
+                        <div class="form-group">
+                            <label for="password-confirm">Confirme a Nova Senha</label>
+                            <input type="password" class="form-control" id="password-confirm">
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                     </form>
                 </div>
