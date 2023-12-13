@@ -30,7 +30,9 @@ $result = mysqli_query($connection, $query);
 
 // Query para selecionar os comentários do post acessado
 $queryComments = "SELECT 
+    comments.id as id,
     comments.content as content,
+    users.id as user_id,
     users.name as user_name,
     users.image as user_image
 FROM comments
@@ -161,6 +163,19 @@ include_once(__DIR__ . '/components/public/header.php');
                                     <?php echo $comment['content']; ?>
                                 </p>
                             </div>
+                            <?php if(isset($_SESSION['user_id'])){ ?>
+                            <?php if($_SESSION['user_id'] == $comment['user_id']){ ?>
+                            <a href="requests/comments/delete_comment.php?comment_id=<?php echo $comment['id']; ?>&post_id=<?php echo $post_id; ?>"
+                                class="btn btn-sm btn-danger ml-2">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <?php } ?>
+                            <a id="like"
+                                href="requests/comments/like_comment.php?comment_id=<?php echo $comment['id']; ?>&post_id=<?php echo $post_id; ?>"
+                                class="btn btn-sm btn-success ml-2">
+                                <i class="fas fa-thumbs-up"></i>
+                            </a>
+                            <?php } ?>
                         </div>
                         <?php } ?>
                         <!-- Mensagem se não houver comentários -->
@@ -184,15 +199,21 @@ include_once(__DIR__ . '/components/public/header.php');
                             fazer login em sua conta.
                         </div>
                         <?php }else{ ?>
-                        <form action="comentarios.php" method="post">
+                        <form action="requests/comments/create_comment.php" method="post">
+                            <?php if(isset($_SESSION['message'])){ ?>
+                            <div class="alert alert-<?= $_SESSION['message_type'] ?>" role="alert">
+                                <?php echo $_SESSION['message']; ?>
+                            </div>
+                            <?php unset($_SESSION['message']); } ?>
+                            <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
                             <div class="form-group">
                                 <p>
                                     Você está logado como <strong><?php echo $_SESSION['user_name']; ?></strong>.
                                 </p>
                             </div>
                             <div class="form-group">
-                                <label for="comentario">Comentário</label>
-                                <textarea class="form-control" id="comentario" name="comentario" rows="3"
+                                <label for="comment">Comentário</label>
+                                <textarea class="form-control" id="comment" name="comment" rows="3"
                                     placeholder="Digite seu comentário" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-color1">Enviar</button>
@@ -229,9 +250,9 @@ include_once(__DIR__ . '/components/public/header.php');
                             <?php } ?>
                             <!-- Mensagem se não houver posts relacionados -->
                             <?php if(mysqli_num_rows($similar_posts) == 0){ ?>
-                                <div class="alert alert-info">
-                                    O autor não possui outros posts.
-                                </div>
+                            <div class="alert alert-info">
+                                O autor não possui outros posts.
+                            </div>
                             <?php } ?>
                         </div>
                     </div>
