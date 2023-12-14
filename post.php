@@ -115,6 +115,38 @@ include_once(__DIR__ . '/components/public/header.php');
                     <!-- Compartilhamento nas Redes Sociais -->
                     <div class="mt-4">
                         <p>Compartilhe esta receita:</p>
+                        <!-- Botão de curtir -->
+                        <?php
+                            $isLiked = false;
+
+                            if(isset($_SESSION['user_id'])){
+                                $user_id = $_SESSION['user_id'];
+
+                                $query = "SELECT * FROM likes WHERE post_id = '$post_id' AND user_id = '$user_id'";
+
+                                $result = mysqli_query($connection, $query);
+
+                                if(mysqli_num_rows($result) > 0){
+                                    $isLiked = true;
+                                }else{
+                                    $isLiked = false;
+                                }
+                            }
+                        ?>
+
+                        <?php if($isLiked){ ?>
+                            <a href="requests/posts/deslike_post.php?post_id=<?php echo $post_id ?>" class="btn btn-secondary">
+                                <i class="fas fa-heart"></i>
+                                Remover curtida
+                            </a>
+                        <?php }else{ ?>
+                            <a href="requests/posts/like_post.php?post_id=<?php echo $post_id ?>" class="btn btn-danger">
+                                <i class="far fa-heart"></i>
+                                Curtir
+                            </a>
+                        <?php } ?>
+
+
                         <!-- Links para compartilhamento -->
                         <a href="whatsapp://send?text=Confira essa deliciosa receita de Escondidinho de Carne Seca no Chef Em Casa"
                             class="btn btn-success" target="_blank" rel="noopener">
@@ -164,17 +196,12 @@ include_once(__DIR__ . '/components/public/header.php');
                                 </p>
                             </div>
                             <?php if(isset($_SESSION['user_id'])){ ?>
-                            <?php if($_SESSION['user_id'] == $comment['user_id']){ ?>
-                            <a href="requests/comments/delete_comment.php?comment_id=<?php echo $comment['id']; ?>&post_id=<?php echo $post_id; ?>"
-                                class="btn btn-sm btn-danger ml-2">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                                <?php if($_SESSION['user_id'] == $comment['user_id']){ ?>
+                                <a href="requests/comments/delete_comment.php?comment_id=<?php echo $comment['id']; ?>&post_id=<?php echo $post_id; ?>"
+                                    class="btn btn-sm btn-danger ml-2">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             <?php } ?>
-                            <a id="like"
-                                href="requests/comments/like_comment.php?comment_id=<?php echo $comment['id']; ?>&post_id=<?php echo $post_id; ?>"
-                                class="btn btn-sm btn-success ml-2">
-                                <i class="fas fa-thumbs-up"></i>
-                            </a>
                             <?php } ?>
                         </div>
                         <?php } ?>

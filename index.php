@@ -121,92 +121,6 @@ include_once(__DIR__ . '/components/public/header.php');
             </div>
           </div>
         </div>
-
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <img src="src/img/12-min.png" class="card-img-top" alt="Bóbó de Camarão">
-            <div class="card-body">
-              <h5 class="card-title">
-                Bóbó de Camarão
-              </h5>
-              <p class="card-text">
-                Receita para toda a família, um delicioso bóbó de camarão com arroz branco e farofa de dendê.
-              </p>
-              <a href="post.php" class="btn btn-color1 btn-sm">
-                Leia Mais
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <img src="src/img/12-min.png" class="card-img-top" alt="Bolo de Cenoura">
-            <div class="card-body">
-              <h5 class="card-title">
-                Bolo de Cenoura
-              </h5>
-              <p class="card-text">
-                Um delicioso bolo de cenoura com cobertura de chocolate, perfeito para o café da tarde.
-              </p>
-              <a href="post.php" class="btn btn-color1 btn-sm">
-                Leia Mais
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <img src="src/img/12-min.png" class="card-img-top" alt="Farinha de Mandioca">
-            <div class="card-body">
-              <h5 class="card-title">
-                Farinha de Mandioca
-              </h5>
-              <p class="card-text">
-                Uma farofa de mandioca com bacon e ovos, perfeita para acompanhar qualquer prato.
-              </p>
-              <a href="post.php" class="btn btn-color1 btn-sm">
-                Leia Mais
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <img src="src/img/12-min.png" class="card-img-top" alt="Arroz de Pato">
-            <div class="card-body">
-              <h5 class="card-title">
-                Arroz de Pato
-              </h5>
-              <p class="card-text">
-                Um delicioso arroz de pato com linguiça calabresa e bacon, perfeito para o almoço de domingo.
-              </p>
-              <a href="post.php" class="btn btn-color1 btn-sm">
-                Leia Mais
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <img src="src/img/12-min.png" class="card-img-top" alt="Sopa de Legumes">
-            <div class="card-body">
-              <h5 class="card-title">
-                Sopa de Legumes
-              </h5>
-              <p class="card-text">
-                Uma deliciosa sopa de legumes com carne moída, perfeita para os dias frios.
-              </p>
-              <a href="post.php" class="btn btn-color1 btn-sm">
-                Leia Mais
-              </a>
-            </div>
-          </div>
-        </div>
-
       </div>
       <div class="text-center mt-4">
         <a href="todas-as-postagens.html" class="btn btn-lg btn-outline-primary">Ver Todas as Postagens</a>
@@ -215,19 +129,19 @@ include_once(__DIR__ . '/components/public/header.php');
   </section>
   <section id="cta" class="text-white text-center py-5">
     <div class="container">
-        <h2 class="mb-4">Faça parte da nossa comunidade!</h2>
-        <p class="lead mb-4">Registre-se agora para ter acesso a receitas exclusivas, interagir com outros chefs e
-            compartilhar suas próprias criações.</p>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <a href="cadastro.php" class="btn btn-light btn-lg btn-block">Cadastre-se</a>
-            </div>
-            <div class="col-md-6">
-                <a href="login.php" class="btn btn-outline-light btn-lg btn-block">Login</a>
-            </div>
+      <h2 class="mb-4">Faça parte da nossa comunidade!</h2>
+      <p class="lead mb-4">Registre-se agora para ter acesso a receitas exclusivas, interagir com outros chefs e
+        compartilhar suas próprias criações.</p>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <a href="cadastro.php" class="btn btn-light btn-lg btn-block">Cadastre-se</a>
         </div>
+        <div class="col-md-6">
+          <a href="login.php" class="btn btn-outline-light btn-lg btn-block">Login</a>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
 
 </main>

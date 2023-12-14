@@ -35,7 +35,7 @@ include_once('../components/admin/header.php');
                         </div>
                         <div class="form-group">
                             <label for="name">Nome</label>
-                            <input type="text" class="form-control" id="name" value="Matheus Teixeira">
+                            <input type="text" class="form-control" id="name" value="<?php $nome ?>">
                         </div>
                         <div class="form-group">
                             <label for="about">Sobre</label>
