@@ -41,18 +41,7 @@ if (mysqli_num_rows($result) > 0) {
         <section class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <?php
-                        // Verifica se a imagem do perfil contém o valor src 
-                        // (ou seja, se o usuário já fez upload de uma imagem)
-
-                        // Corrigido o caminho da imagem
-                        if (strpos($image, 'src') !== false) {
-                            $image = $image;
-                    ?>
-                    <img src="../<?php echo $image ?>" class="img-fluid mb-3" alt="<?php echo $name ?>">
-                    <?php } else { ?>
-                    <img src="<?php echo $image ?>" class="img-fluid mb-3" alt="<?php echo $name ?>">
-                    <?php } ?>
+                    <img src="<?php echo $image; ?>" class="rounded-circle" alt="Foto de Perfil"> 
                     <h5>
                         <?php echo $name ?>
                     </h5>
@@ -76,7 +65,7 @@ if (mysqli_num_rows($result) > 0) {
                             <label for="image">Foto de Perfil</label>
                             <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
                             <input type="hidden" name="actual_image" value="<?php echo $image ?>">
-                        </div>
+                        </div> 
                         <div class="form-group">
                             <label for="name">Nome</label>
                             <input type="text" class="form-control" id="name" value="<?php echo $name ?>" required
