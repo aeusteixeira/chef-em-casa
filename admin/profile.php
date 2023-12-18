@@ -41,7 +41,17 @@ if (mysqli_num_rows($result) > 0) {
         <section class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <img src="<?php echo $image; ?>" class="rounded-circle" alt="Foto de Perfil"> 
+                    <?php 
+                        // Verifica se a imagem atual contém o valor src
+                        // (sou seja, se o usuário já fez o upload de uma imagem)
+
+                        if(strpos($image, 'src') !== false){ $image = $image; ?>
+                            <img src="../<?php echo $image; ?>" class="rounded-circle" alt="Foto de Perfil"> 
+                        <?php }else{ ?>
+                            <img src="<?php echo $image; ?>" class="rounded-circle" alt="Foto de Perfil"> 
+                        <?php } ?>
+
+                        
                     <h5>
                         <?php echo $name ?>
                     </h5>
