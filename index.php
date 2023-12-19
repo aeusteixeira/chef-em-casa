@@ -9,6 +9,18 @@
 $pageName = $pageInfo['pageName'];
 
 include_once(__DIR__ . '/components/public/header.php');
+
+// Query para obter as receitas mais recentes
+$query = "SELECT * FROM posts ORDER BY created_at";
+
+// Executa a consulta
+$result = mysqli_query($connection, $query);
+
+// Passa as receitas para a variável $recipes
+$recipes = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+// Fecha a consulta
+mysqli_free_result($result);
 ?>
 <main class="">
   <section id="carrousel">
@@ -105,22 +117,26 @@ include_once(__DIR__ . '/components/public/header.php');
     <div class="container">
       <h2 class="text-center mb-4">Últimas Postagens</h2>
       <div class="row">
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <img src="src/img/12-min.png" class="card-img-top" alt="Escondidinho de Carne Seca">
-            <div class="card-body">
-              <h5 class="card-title">
-                Escondidinho de Carne Seca
-              </h5>
-              <p class="card-text">
-                Um delicioso escondidinho de carne seca com purê de mandioca e queijo coalho gratinado.
-              </p>
-              <a href="post.php" class="btn btn-color1 btn-sm">
-                Leia Mais
-              </a>
+        <?php if(count($recipes) > 0) { ?>
+        <?php foreach($recipes as $recipe) { ?>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <img src="<?php echo $recipe['image']; ?>" alt="Imagem da Receita" class="card-img-top">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <?php echo $recipe['title']; ?>
+                </h5>
+                <p class="card-text">
+                  <?php echo $recipe['content']; ?>
+                </p>
+                <a href="post.php?post_id=<?php echo $recipe['id']; ?>" class="btn btn-color1 text-light stretched-link">Leia mais</a>
+              </div>
             </div>
           </div>
-        </div>
+        <?php } ?>
+        <?php } else { ?>
+          <p class="text-center">Nenhuma postagem encontrada.</p>
+        <?php } ?>
       </div>
       <div class="text-center mt-4">
         <a href="todas-as-postagens.html" class="btn btn-lg btn-outline-primary">Ver Todas as Postagens</a>

@@ -3,6 +3,8 @@
 session_start();
 
 include_once('helpers/isActivePage.php');
+include_once('helpers/database.php');
+$connection = connectDatabase();
 
 ?>
 
